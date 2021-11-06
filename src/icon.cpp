@@ -28,11 +28,12 @@ namespace iconpp
         auto *gdk = dlopen("libgdk-3.so.0", RTLD_LAZY);
         auto *wnck = dlopen("libwnck-3.so.0", RTLD_LAZY);
         auto *glib = dlopen("libglib-2.0.so.0", RTLD_LAZY);
+        auto *pixbuf = dlopen("libgdk_pixbuf-2.0.so.0", RTLD_LAZY);
 
-        if (gdk && wnck && glib)
+        if (gdk && wnck && glib && pixbuf)
         {
             gdk_init_check = reinterpret_cast<decltype(gdk_init_check)>(dlsym(gdk, "gdk_init_check"));
-            gdk_pixbuf_save_to_buffer = reinterpret_cast<decltype(gdk_pixbuf_save_to_buffer)>(dlsym(gdk, "gdk_pixbuf_save_to_buffer"));
+            gdk_pixbuf_save_to_buffer = reinterpret_cast<decltype(gdk_pixbuf_save_to_buffer)>(dlsym(pixbuf, "gdk_pixbuf_save_to_buffer"));
 
             g_base64_encode = reinterpret_cast<decltype(g_base64_encode)>(dlsym(glib, "g_base64_encode"));
 
