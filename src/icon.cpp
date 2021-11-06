@@ -140,4 +140,23 @@ namespace iconpp
 
         out.close();
     }
+
+    tl::expected<std::vector<std::pair<int, std::string>>, error_t> icon::get_windows()
+    {
+        if (!g_default_screen)
+            return tl::make_unexpected(error_t::wnck_not_found);
+
+        std::vector<std::pair<int, std::string>> rtn;
+
+        wnck_screen_force_update(g_default_screen);
+        auto *windows = wnck_screen_get_windows(g_default_screen);
+
+        for (auto *item = windows; item != nullptr; item = item->next)
+        {
+            auto *window = reinterpret_cast<void *>(item->data);
+            rtn.emplace_back(std::make_pair(wnck_window_get_pid(window), wnck_window_get_name(window)));
+        }
+
+        return rtn;
+    }
 } // namespace iconpp

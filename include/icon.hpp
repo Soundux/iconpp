@@ -33,5 +33,6 @@ namespace iconpp
         static bool is_found() noexcept;
         static tl::expected<icon, error_t> get(int pid);
         static tl::expected<icon, error_t> get(const std::string &name);
+        static tl::expected<std::vector<std::pair<int, std::string>>, error_t> get_windows();
     };
 } // namespace iconpp
