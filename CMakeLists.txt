@@ -5,10 +5,14 @@ project(iconpp LANGUAGES CXX VERSION 1.0)
 # Create library
 # --------------------------------------------------------------------------------------------------------
 
-add_library(${PROJECT_NAME} "src/icon.cpp")
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Werror -Wextra -pedantic)
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 CXX_EXTENSIONS OFF CXX_STANDARD_REQUIRED ON)
+if (UNIX)
+    add_library(${PROJECT_NAME} "src/icon.cpp")
+    target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Werror -Wextra -pedantic)
+    set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 CXX_EXTENSIONS OFF CXX_STANDARD_REQUIRED ON)
+else()
+    add_library(${PROJECT_NAME} INTERFACE) # Create empty library on unsupported platform
+endif()
 
 # --------------------------------------------------------------------------------------------------------
 # Include "include" folder
