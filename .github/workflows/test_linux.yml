@@ -24,10 +24,10 @@ jobs:
           submodules: recursive
 
       - name: Install build dependencies
-        run: "sudo apt-get update && sudo apt-get install git build-essential cmake libwnck-3-0 libglib2.0-0 libgdk-pixbuf2.0-0"
+        run: "sudo apt-get update && sudo apt-get install git build-essential cmake libwnck-3-0 libglib2.0-0 libgdk-pixbuf2.0-0 xvfb"
 
       - name: Compile
         run: "mkdir build && cd build && cmake .. -Diconpp_tests=ON && cmake --build . --config Debug"
 
       - name: Run Tests
-        run: "./build/iconpp_tests"
+        run: "xvfb-run ./build/iconpp_tests"
