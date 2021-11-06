@@ -72,6 +72,8 @@ This is done to ensure that the library will compile everywhere but only grab ic
 - wnck3
 - gdk3
 - glib2
+- [`Catch2`](https://github.com/catchorg/Catch2) _(For tests only!)_
+- [`expected`](https://github.com/TartanLlama/expected)
   
 ## ✅ Tested Systems
 > The following distributions have been confirmed working with the listed dependencies.
