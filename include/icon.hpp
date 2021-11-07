@@ -26,6 +26,7 @@ namespace iconpp
 
       public:
         std::string get_base64() const;
+        std::size_t get_size() const noexcept;
         void save(const std::filesystem::path &) const;
         std::shared_ptr<unsigned char[]> get_raw() const noexcept;
 

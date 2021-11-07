@@ -118,6 +118,11 @@ namespace iconpp
         return tl::make_unexpected(error_t::process_not_found);
     }
 
+    std::size_t icon::get_size() const noexcept
+    {
+        return m_size;
+    }
+
     bool icon::is_found() noexcept
     {
         return g_default_screen;
