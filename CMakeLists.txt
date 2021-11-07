@@ -40,7 +40,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE dl PUBLIC tl::expected)
 
 option(iconpp_tests "Build tests" OFF)
 
-if (iconpp_tests)
+if (${iconpp_tests} AND UNIX)
     message(STATUS "Building iconpp tests")
 
     if (NOT TARGET Catch2::Catch2WithMain)
@@ -54,10 +54,7 @@ if (iconpp_tests)
     add_executable(${PROJECT_NAME}_tests ${src})
     target_link_libraries(${PROJECT_NAME}_tests PRIVATE Catch2::Catch2WithMain ${PROJECT_NAME})
     
-    if (UNIX)
-        target_compile_options(${PROJECT_NAME}_tests INTERFACE -Wall -Werror -Wextra -pedantic)
-    endif()
-    
-    target_compile_features(${PROJECT_NAME}_tests INTERFACE cxx_std_17)
+    target_compile_features(${PROJECT_NAME}_tests PRIVATE cxx_std_17)
+    target_compile_options(${PROJECT_NAME}_tests PRIVATE -Wall -Werror -Wextra -pedantic)
     set_target_properties(${PROJECT_NAME}_tests PROPERTIES CXX_STANDARD 17 CXX_EXTENSIONS OFF CXX_STANDARD_REQUIRED ON)
 endif()
